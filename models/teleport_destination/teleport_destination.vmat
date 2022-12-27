@@ -1,0 +1,11 @@
+
+Layer0
+{
+	shader "complex.vfx"
+
+	TextureColor "models/teleport_destination/src/final_material/final_material_albedo.png"
+	TextureAmbientOcclusion "models/teleport_destination/src/final_material/final_material_ao.png"
+	TextureNormal "models/teleport_destination/src/final_material/final_material_normal.png"
+	TextureRoughness "models/teleport_destination/src/final_material/final_material_roughness.png"
+
+}

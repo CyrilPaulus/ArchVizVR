@@ -14,6 +14,8 @@ namespace Sandbox.Pawns
 		[Net, Local] public VRHand LeftHand { get; private set; }
 		[Net, Local] public VRHand RightHand { get; private set; }
 
+        [Net, Local] public VRTeleportDestination TeleportDestination { get; private set; }
+
 		private List<IVRGesture> _gestures = new();
 
 		public override void Spawn()
@@ -24,18 +26,36 @@ namespace Sandbox.Pawns
 			RightHand = new RightVRHand();
 			RightHand.Owner = this;
 
-			base.Spawn();
+			TeleportDestination = new VRTeleportDestination();
+            TeleportDestination.Owner = this;
+            TeleportDestination.EnableDrawing = false;
 
 			var turnGesture = new TurnGesture( LeftHand );
 			turnGesture.OnEmitted += OnTurn;
 			_gestures.Add( turnGesture );
-		}
 
-		private void OnTurn( object sender, TurnGestureResult e )
+            var teleportGesture = new TeleportGesture(LeftHand, TeleportDestination);
+            teleportGesture.OnEmitted += OnTeleport;
+            _gestures.Add(teleportGesture);
+
+            base.Spawn();
+
+        }
+
+        private void OnTeleport(object sender, Vector3 destination)
+        {
+            var headOffset = Position - Input.VR.Head.Position;
+            Position = destination  + new Vector3(headOffset.x, headOffset.y, 0);
+        }
+
+        private void OnTurn( object sender, TurnGestureResult e )
 		{
 			var direction = e == TurnGestureResult.TurnLeft ? -1 : 1;
-			Rotation *= new Angles( 0f, -45 * direction, 0f ).ToRotation();
-		}
+            Transform = Transform.RotateAround(
+                    Input.VR.Head.Position.WithZ(Position.z),
+                    Rotation.FromAxis(Vector3.Up, -45 * direction)
+                );
+        }
 
 		public override void Simulate( IClient cl )
 		{
