@@ -3,8 +3,8 @@
 	<PropertyGroup>
 		<TargetFramework>net7.0</TargetFramework>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<AssemblyName>archvizvr</AssemblyName>
-		<PackageId>archvizvr</PackageId>
+		<AssemblyName>explore_vr</AssemblyName>
+		<PackageId>explore_vr</PackageId>
 		<LangVersion>11</LangVersion>
 		<NoWarn>1701;1702;1591;</NoWarn>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
@@ -29,7 +29,7 @@
 
   <PropertyGroup>
 	<OutputPath>D:\Jeux\Steam\steamapps\common\sbox/.vs/output/</OutputPath>
-	<DocumentationFile>D:\Jeux\Steam\steamapps\common\sbox/.vs/output/archvizvr.xml</DocumentationFile>
+	<DocumentationFile>D:\Jeux\Steam\steamapps\common\sbox/.vs/output/explore_vr.xml</DocumentationFile>
 	<RootNamespace>Sandbox</RootNamespace>
 	<Nullable>disable</Nullable>
   </PropertyGroup>
